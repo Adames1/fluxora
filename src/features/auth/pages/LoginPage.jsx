@@ -13,26 +13,31 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, loginDefaultValues } from "@/utils/validations";
+import { loginWithEmail } from "../services/auth.services";
 
 function LoginPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: loginDefaultValues,
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset(loginDefaultValues);
+  const onSubmit = async (data) => {
+    try {
+      await loginWithEmail(data.email, data.password);
+      toast.success("Haz Iniciado sesion!");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (

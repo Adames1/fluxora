@@ -8,10 +8,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) return;
-
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      setUser(session.user ?? null);
+      setUser(session?.user ?? null);
       setLoading(false);
     });
 

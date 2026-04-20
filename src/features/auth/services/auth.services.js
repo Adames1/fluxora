@@ -11,11 +11,19 @@ export const loginWithEmail = async (email, password) => {
 };
 
 // crear un nuevo usuario
-export const createNewUser = async (email, password) => {
+export const createNewUser = async (fullName, email, password) => {
   const { error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: { full_name: fullName },
+    },
   });
 
+  if (error) throw error;
+};
+
+export const logout = async () => {
+  const { error } = await supabase.auth.signOut();
   if (error) throw error;
 };

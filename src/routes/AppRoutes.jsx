@@ -7,6 +7,7 @@ import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes";
 import AuthLayout from "@/layouts/AuthLayout";
+import MainLayout from "@/layouts/MainLayout";
 
 function AppRoutes() {
   return (
@@ -21,7 +22,9 @@ function AppRoutes() {
 
       {/* rutas protegidas */}
       <Route element={<ProtectedRoutes />}>
-        <Route path="/" element={<DashboardPage />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<DashboardPage />} />
+        </Route>
       </Route>
     </Routes>
   );

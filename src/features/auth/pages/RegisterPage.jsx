@@ -18,21 +18,26 @@ import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, registerDefaultValues } from "@/utils/validations";
+import { toast } from "sonner";
+import { createNewUser } from "../services/auth.services";
 
 function RegisterPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: zodResolver(registerSchema),
     defaultValues: registerDefaultValues,
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    reset(registerDefaultValues);
+  const onSubmit = async (data) => {
+    try {
+      await createNewUser(data.full_name, data.email, data.password);
+      toast.success("Bienvenido a FlowMe!");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
