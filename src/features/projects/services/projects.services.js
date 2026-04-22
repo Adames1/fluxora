@@ -10,3 +10,19 @@ export const addProject = async (projectData) => {
 
   if (error) throw error;
 };
+
+// obtener todos los proyectos
+export const getAllProjects = async () => {
+  const { data, error } = await supabase.from("projects").select();
+
+  if (error) throw error;
+
+  return data;
+};
+
+// eliminar proyecto
+export const deleteProject = async (id) => {
+  const { error } = await supabase.from("projects").delete().eq("id", id);
+
+  if (error) throw error;
+};

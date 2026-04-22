@@ -28,8 +28,10 @@ import {
   projectDefaultValues,
 } from "../validations/projects.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useProjects } from "../hooks/useProjects";
 
-function ProjectsForm({ onSubmit }) {
+function ProjectsForm() {
+  const { handleAddProject } = useProjects();
   const {
     register,
     handleSubmit,
@@ -44,7 +46,7 @@ function ProjectsForm({ onSubmit }) {
   return (
     <DialogContent className="sm:max-w-sm">
       <form
-        onSubmit={handleSubmit((data) => onSubmit(data, reset))}
+        onSubmit={handleSubmit((data) => handleAddProject(data, reset))}
         className="space-y-6"
       >
         <DialogHeader>

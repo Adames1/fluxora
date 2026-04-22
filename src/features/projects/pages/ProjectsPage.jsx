@@ -1,33 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import ProjectsForm from "../components/ProjectsForm";
-import { addProject } from "../services/projects.services";
-import { toast } from "sonner";
+import { getAllProjects } from "../services/projects.services";
+import { useEffect, useState } from "react";
+import ProjectsList from "../components/ProjectsList";
 
 function ProjectsPage() {
-  const handleAddProject = async (data, reset) => {
-    try {
-      await addProject(data);
+  const [projects, setProjects] = useState([]);
 
-      toast.success("Nuevo proyecto agregado");
-      reset();
-    } catch (error) {
-      console.error("Error al crear proyecto", error.message);
-      toast.error(error.message);
-    }
-  };
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const projectsData = await getAllProjects();
+      setProjects(projectsData);
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
-    <div className="flex items-center justify-between">
-      <h1 className="text-xl font-semibold">Mis Proyectos</h1>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-semibold">Mis Proyectos (4)</h1>
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline">Crear proyecto</Button>
-        </DialogTrigger>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">Crear proyecto</Button>
+          </DialogTrigger>
 
-        <ProjectsForm onSubmit={handleAddProject} />
-      </Dialog>
+          <ProjectsForm />
+        </Dialog>
+      </div>
+
+      <ProjectsList projects={projects} />
     </div>
   );
 }
