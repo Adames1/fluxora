@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema, loginDefaultValues } from "@/utils/validations";
+import { loginSchema, loginDefaultValues } from "../validations/auth.schemas";
 import { loginWithEmail } from "../services/auth.services";
 
 function LoginPage() {

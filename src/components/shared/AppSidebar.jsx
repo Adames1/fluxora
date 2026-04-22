@@ -12,7 +12,7 @@ import { Link } from "react-router";
 import NavMain from "./NavMain";
 import NavUser from "./NavUser";
 import { logout } from "@/features/auth/services/auth.services";
-import { getDataProfile } from "@/features/auth/profiles/services/profiles.services";
+import { getDataProfile } from "@/features/profiles/services/profiles.services";
 import { useEffect, useState } from "react";
 
 const navItems = [

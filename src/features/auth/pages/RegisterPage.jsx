@@ -17,7 +17,10 @@ import { Input } from "@/components/ui/input";
 import { Link } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema, registerDefaultValues } from "@/utils/validations";
+import {
+  registerSchema,
+  registerDefaultValues,
+} from "../validations/auth.schemas";
 import { toast } from "sonner";
 import { createNewUser } from "../services/auth.services";
 

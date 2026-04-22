@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -6,6 +5,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { NavLink } from "react-router";
 
 function NavMain({ items }) {
   return (
@@ -13,12 +13,12 @@ function NavMain({ items }) {
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
+            <NavLink key={item.title} to={item.url}>
               <SidebarMenuButton tooltip={item.title}>
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
               </SidebarMenuButton>
-            </SidebarMenuItem>
+            </NavLink>
           ))}
         </SidebarMenu>
       </SidebarGroupContent>
