@@ -6,7 +6,9 @@ export const addProject = async (projectData) => {
 
   const { error } = await supabase
     .from("projects")
-    .insert({ name, description, status });
+    .insert({ name, description, status })
+    .select()
+    .single();
 
   if (error) throw error;
 };

@@ -1,21 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import ProjectsForm from "../components/ProjectsForm";
-import { getAllProjects } from "../services/projects.services";
-import { useEffect, useState } from "react";
 import ProjectsList from "../components/ProjectsList";
+import { useProjects } from "../hooks/useProjects";
 
 function ProjectsPage() {
-  const [projects, setProjects] = useState([]);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const projectsData = await getAllProjects();
-      setProjects(projectsData);
-    };
-
-    fetchProjects();
-  }, []);
+  const { projects, loading } = useProjects();
 
   return (
     <div className="space-y-6">
@@ -31,7 +21,11 @@ function ProjectsPage() {
         </Dialog>
       </div>
 
-      <ProjectsList projects={projects} />
+      {loading ? (
+        <p>Cargando proyectos...</p>
+      ) : (
+        <ProjectsList projects={projects} />
+      )}
     </div>
   );
 }

@@ -45,7 +45,7 @@ function ProjectsCard({ project }) {
           <Progress value={66} id="progress-upload" />
         </Field>
 
-        <div className="w-full flex items-center justify-between mt-3">
+        <div className="w-full flex items-center justify-between mt-4">
           <h3>Tareas</h3>
           <h2>1 / 10</h2>
         </div>
