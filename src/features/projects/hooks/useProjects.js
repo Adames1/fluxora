@@ -30,5 +30,10 @@ export const useProjects = () => {
     }
   };
 
-  return { projects, loading, handleAddProject, handleDeleteProyect };
+  return {
+    projects,
+    loading,
+    handleAddProject,
+    handleDeleteProyect,
+  };
 };

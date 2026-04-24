@@ -4,6 +4,7 @@ import LoginPage from "@/features/auth/pages/LoginPage";
 import RegisterPage from "@/features/auth/pages/RegisterPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import ProjectsPage from "@/features/projects/pages/ProjectsPage";
+import ProjectsTasks from "@/features/projects/pages/ProjectsTasks";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes";
@@ -26,6 +27,7 @@ function AppRoutes() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:id" element={<ProjectsTasks />} />
         </Route>
       </Route>
     </Routes>

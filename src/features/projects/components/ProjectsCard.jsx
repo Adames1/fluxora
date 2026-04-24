@@ -56,7 +56,7 @@ function ProjectsCard({ project }) {
       <CardFooter>
         <div className="w-full flex items-center justify-end gap-2">
           <Button variant="outline" size="sm" asChild>
-            <Link>
+            <Link to={`/projects/${project.id}`}>
               <ClipboardCheck />
               <span>Ver Tareas</span>
             </Link>
