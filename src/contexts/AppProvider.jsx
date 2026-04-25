@@ -1,12 +1,15 @@
 import { AuthProvider } from "./AuthContext";
 import { ProjectsProvider } from "./ProjectsContext";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { TasksByProjectProvider } from "./TasksProjectContext";
 
 function AppProvider({ children }) {
   return (
     <AuthProvider>
       <ProjectsProvider>
-        <TooltipProvider>{children}</TooltipProvider>
+        <TasksByProjectProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </TasksByProjectProvider>
       </ProjectsProvider>
     </AuthProvider>
   );

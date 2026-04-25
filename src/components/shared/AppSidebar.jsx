@@ -26,11 +26,6 @@ const navItems = [
     url: "/projects",
     icon: BriefcaseBusiness,
   },
-  {
-    title: "Mi Lista",
-    url: "/my-list",
-    icon: List,
-  },
 ];
 
 function AppSidebar({ ...props }) {

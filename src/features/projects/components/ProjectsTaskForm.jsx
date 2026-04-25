@@ -24,8 +24,13 @@ import { Separator } from "@/components/ui/separator";
 import { taskDefaultValues, taskSchema } from "../validations/tasks.schemas";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTasks } from "../hooks/useTasks";
+import { useParams } from "react-router";
 
-function ProjectsTaskForm({ onSubmit }) {
+function ProjectsTaskForm() {
+  const { id } = useParams();
+
+  const { handleAddTask } = useTasks();
   const {
     register,
     handleSubmit,
@@ -39,7 +44,10 @@ function ProjectsTaskForm({ onSubmit }) {
 
   return (
     <DialogContent className="sm:max-w-sm">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={handleSubmit((data) => handleAddTask(id, data, reset))}
+        className="space-y-6"
+      >
         <DialogHeader>
           <DialogTitle>Crear Tarea</DialogTitle>
           <DialogDescription></DialogDescription>
