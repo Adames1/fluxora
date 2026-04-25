@@ -22,8 +22,19 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 import { Trash, Pen, ClipboardCheck } from "lucide-react";
 import DeleteModal from "@/components/shared/DeleteModal";
+import { useTasks } from "../hooks/useTasks";
 
 function ProjectsCard({ project }) {
+  const { tasksByProject } = useTasks();
+
+  const totalTasks = tasksByProject.length;
+
+  const tasksCompleted = tasksByProject.filter(
+    (task) => task.is_completed,
+  ).length;
+
+  const percentageCompleted = (tasksCompleted / totalTasks) * 100;
+
   return (
     <Card size="sm">
       <CardHeader>
@@ -37,18 +48,18 @@ function ProjectsCard({ project }) {
       </CardHeader>
 
       <CardContent>
-        <Field className="w-full max-w-sm">
+        <Field className="w-full">
           <FieldLabel htmlFor="progress-upload">
-            <span>Progreso</span>
-            <span className="ml-auto">66%</span>
+            <div className="flex items-center justify-between w-full">
+              <span>Progreso</span>
+              <div className="flex items-center gap-2">
+                <h2>{`${tasksCompleted} / ${totalTasks}`}</h2>
+                <h3>Tareas</h3>
+              </div>
+            </div>
           </FieldLabel>
-          <Progress value={66} id="progress-upload" />
+          <Progress value={percentageCompleted} id="progress-upload" />
         </Field>
-
-        <div className="w-full flex items-center justify-between mt-4">
-          <h3>Tareas</h3>
-          <h2>1 / 10</h2>
-        </div>
       </CardContent>
 
       <Separator />

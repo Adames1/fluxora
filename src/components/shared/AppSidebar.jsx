@@ -7,7 +7,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { ArrowDownUp, BriefcaseBusiness, ChartPie, List } from "lucide-react";
+import { ArrowDownUp, ChartPie, Folder } from "lucide-react";
 import { Link } from "react-router";
 import NavMain from "./NavMain";
 import NavUser from "./NavUser";
@@ -24,7 +24,7 @@ const navItems = [
   {
     title: "Proyectos",
     url: "/projects",
-    icon: BriefcaseBusiness,
+    icon: Folder,
   },
 ];
 

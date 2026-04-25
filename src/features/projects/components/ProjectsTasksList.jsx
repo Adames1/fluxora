@@ -1,4 +1,12 @@
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -8,43 +16,58 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { useTasks } from "../hooks/useTasks";
-import { Trash2 } from "lucide-react";
+import { X } from "lucide-react";
 
 function ProjectsTasksList({ tasksByProject }) {
   const { handleDeleteTask } = useTasks();
+
   return (
-    <ul className="space-y-2">
-      {tasksByProject.map((task) => (
-        <li
-          key={task.id}
-          className="flex items-center justify-between p-2 border rounded-lg bg-muted/30"
-        >
-          <div className="flex items-center gap-2">
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-8">
             <Checkbox />
-            <span>{task.name}</span>
-          </div>
+          </TableHead>
+          <TableHead>Nombre</TableHead>
+          <TableHead>Prioridad</TableHead>
+          <TableHead>Estado</TableHead>
+          <TableHead className="text-right">Acciones</TableHead>
+        </TableRow>
+      </TableHeader>
 
-          <div className="flex items-center gap-6">
-            <Badge>{task.priority}</Badge>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="sm"
-                  variant="destructive"
-                  onClick={() => handleDeleteTask(task.id)}
-                >
-                  <Trash2 />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Eliminar tarea</p>
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        </li>
-      ))}
-    </ul>
+      <TableBody>
+        {tasksByProject.map((task) => (
+          <TableRow key={task.id}>
+            <TableCell>
+              <Checkbox />
+            </TableCell>
+            <TableCell className="font-medium">{task.name}</TableCell>
+            <TableCell>
+              <Badge>{task.priority}</Badge>
+            </TableCell>
+            <TableCell>
+              <Badge>{task.is_completed ? "Completada" : "Pendiente"}</Badge>
+            </TableCell>
+            <TableCell className="text-right">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    onClick={() => handleDeleteTask(task.id)}
+                  >
+                    <X />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Eliminar tarea</p>
+                </TooltipContent>
+              </Tooltip>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }
 

@@ -4,13 +4,17 @@ import ProjectsForm from "../components/ProjectsForm";
 import ProjectsList from "../components/ProjectsList";
 import { useProjects } from "../hooks/useProjects";
 
+import emptyData from "/images/empty-data.svg";
+
 function ProjectsPage() {
   const { projects, loading } = useProjects();
 
+  const totalProjects = projects.length;
+
   return (
-    <div className="space-y-6">
+    <div className="h-full flex flex-col gap-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Mis Proyectos (4)</h1>
+        <h1 className="text-xl font-semibold">{`Mis Proyectos (${totalProjects})`}</h1>
 
         <Dialog>
           <DialogTrigger asChild>
@@ -22,9 +26,22 @@ function ProjectsPage() {
       </div>
 
       {loading ? (
-        <p>Cargando proyectos...</p>
-      ) : (
+        <div className="w-full max-w-sm m-auto">
+          <p className="text-center">Cargando proyectos...</p>
+        </div>
+      ) : projects.length > 0 ? (
         <ProjectsList projects={projects} />
+      ) : (
+        <div className="w-full max-w-sm m-auto">
+          <div className="flex flex-col gap-6 items-center">
+            <img src={emptyData} className="w-60 h-60" />
+            <p className="text-center text-gray-600">
+              No tienes proyectos agregados. Presiona el boton{" "}
+              <strong>"Crear proyecto"</strong>
+              para agregar uno a tu lista.
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
