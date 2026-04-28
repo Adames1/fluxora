@@ -19,6 +19,17 @@ import { EllipsisVertical, LogOut } from "lucide-react";
 function NavUser({ handleLogOut, profile }) {
   const { isMobile } = useSidebar();
 
+  const getInitials = (fullName) => {
+    if (!fullName) return "?";
+
+    const [firstName, lastName] = fullName.trim().split(" ");
+
+    const firstInitial = firstName?.[0] ?? "";
+    const lastInitial = lastName?.[0] ?? "";
+
+    return `${firstInitial}${lastInitial}`.toUpperCase();
+  };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -33,7 +44,9 @@ function NavUser({ handleLogOut, profile }) {
                   src="/avatars/shadcn.jpg"
                   alt={profile?.full_name}
                 />
-                <AvatarFallback className="rounded-lg">AA</AvatarFallback>
+                <AvatarFallback className="rounded-lg">
+                  {getInitials(profile?.full_name)}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">

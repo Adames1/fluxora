@@ -24,7 +24,7 @@ import { Trash, Pen, ClipboardCheck } from "lucide-react";
 import DeleteModal from "@/components/shared/DeleteModal";
 import { useTasks } from "../hooks/useTasks";
 
-function ProjectsCard({ project }) {
+function ProjectsCard({ project, projectsLabel }) {
   const { tasksByProject } = useTasks();
 
   const totalTasks = tasksByProject.length;
@@ -39,7 +39,7 @@ function ProjectsCard({ project }) {
     <Card size="sm">
       <CardHeader>
         <CardAction>
-          <Badge variant="secondary">{project.status}</Badge>
+          <Badge variant="secondary">{projectsLabel[project.status]}</Badge>
         </CardAction>
         <CardTitle>{project.name}</CardTitle>
         <CardDescription>

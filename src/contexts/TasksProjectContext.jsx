@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { supabase } from "@/utils/supabase";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { getTaskByProjectId } from "@/features/projects/services/tasks.services";
+import { getAllTask } from "@/features/projects/services/tasks.services";
 
 export const TasksProjectContext = createContext();
 
@@ -15,7 +15,7 @@ export function TasksByProjectProvider({ children }) {
 
     const fetchTasksProjects = async () => {
       try {
-        const data = await getTaskByProjectId();
+        const data = await getAllTask();
         setTasksByProject(data);
       } catch (error) {
         console.error(error.message);

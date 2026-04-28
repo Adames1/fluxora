@@ -15,12 +15,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import { useTasks } from "../hooks/useTasks";
 import { X } from "lucide-react";
 
-function ProjectsTasksList({ tasksByProject }) {
-  const { handleDeleteTask } = useTasks();
-
+function ProjectsTasksList({
+  tasksByProject,
+  onDeleteTask,
+  tasksLabel,
+  onToggleTaskComplete,
+}) {
   return (
     <Table>
       <TableHeader>
@@ -37,13 +39,27 @@ function ProjectsTasksList({ tasksByProject }) {
 
       <TableBody>
         {tasksByProject.map((task) => (
-          <TableRow key={task.id}>
+          <TableRow
+            key={task.id}
+            data-state={task.is_completed ? "selected" : undefined}
+          >
             <TableCell>
-              <Checkbox />
+              <Checkbox
+                id={task.id}
+                name={task.id}
+                checked={task.is_completed}
+                onCheckedChange={(checked) => {
+                  onToggleTaskComplete(task.id, checked);
+                }}
+              />
             </TableCell>
-            <TableCell className="font-medium">{task.name}</TableCell>
+            <TableCell
+              className={`font-medium ${task.is_completed ? "text-gray-500 line-through" : ""}`}
+            >
+              {task.name}
+            </TableCell>
             <TableCell>
-              <Badge>{task.priority}</Badge>
+              <Badge>{tasksLabel[task.priority]}</Badge>
             </TableCell>
             <TableCell>
               <Badge>{task.is_completed ? "Completada" : "Pendiente"}</Badge>
@@ -54,7 +70,7 @@ function ProjectsTasksList({ tasksByProject }) {
                   <Button
                     size="sm"
                     variant="destructive"
-                    onClick={() => handleDeleteTask(task.id)}
+                    onClick={() => onDeleteTask(task.id)}
                   >
                     <X />
                   </Button>

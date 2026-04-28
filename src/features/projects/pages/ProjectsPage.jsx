@@ -11,6 +11,12 @@ function ProjectsPage() {
 
   const totalProjects = projects.length;
 
+  const projectsLabel = {
+    pending: "Pendiente",
+    completed: "Completado",
+    in_progress: "En Progreso",
+  };
+
   return (
     <div className="h-full flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -30,7 +36,7 @@ function ProjectsPage() {
           <p className="text-center">Cargando proyectos...</p>
         </div>
       ) : projects.length > 0 ? (
-        <ProjectsList projects={projects} />
+        <ProjectsList projects={projects} projectsLabel={projectsLabel} />
       ) : (
         <div className="w-full max-w-sm m-auto">
           <div className="flex flex-col gap-6 items-center">

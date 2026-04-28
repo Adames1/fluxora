@@ -13,8 +13,8 @@ export const addTask = async (projectId, taskData) => {
   if (error) throw error;
 };
 
-// obtener tareas por proyecto
-export const getTaskByProjectId = async () => {
+// obtener tareas todas las tareas
+export const getAllTask = async () => {
   const { data, error } = await supabase.from("tasks").select();
 
   if (error) throw error;
@@ -22,8 +22,18 @@ export const getTaskByProjectId = async () => {
 };
 
 // eliminar tarea
-export const deleteTask = async (id) => {
-  const { error } = await supabase.from("tasks").delete().eq("id", id);
+export const deleteTask = async (taskId) => {
+  const { error } = await supabase.from("tasks").delete().eq(taskId);
+
+  if (error) throw error;
+};
+
+// marcar una tarea completada
+export const toggleTaskComplete = async (taskId, isCompleted) => {
+  const { error } = await supabase
+    .from("tasks")
+    .update({ is_completed: isCompleted })
+    .eq("id", taskId);
 
   if (error) throw error;
 };

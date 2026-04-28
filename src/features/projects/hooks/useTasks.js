@@ -1,4 +1,8 @@
-import { addTask, deleteTask } from "../services/tasks.services";
+import {
+  addTask,
+  deleteTask,
+  toggleTaskComplete,
+} from "../services/tasks.services";
 import { toast } from "sonner";
 import { useContext } from "react";
 import { TasksProjectContext } from "@/contexts/TasksProjectContext";
@@ -30,5 +34,19 @@ export const useTasks = () => {
     }
   };
 
-  return { handleAddTask, handleDeleteTask, tasksByProject, loading };
+  const handleToggleTaskComplete = async (id, isCompleted) => {
+    try {
+      await toggleTaskComplete(id, isCompleted);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  return {
+    handleAddTask,
+    handleDeleteTask,
+    handleToggleTaskComplete,
+    tasksByProject,
+    loading,
+  };
 };
