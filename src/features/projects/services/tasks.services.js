@@ -23,7 +23,7 @@ export const getAllTask = async () => {
 
 // eliminar tarea
 export const deleteTask = async (taskId) => {
-  const { error } = await supabase.from("tasks").delete().eq(taskId);
+  const { error } = await supabase.from("tasks").delete().eq("id", taskId);
 
   if (error) throw error;
 };

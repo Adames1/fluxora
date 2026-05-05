@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
 function ProjectsTasksList({
-  tasksByProject,
+  tasksByProjectId,
   onDeleteTask,
   tasksLabel,
   onToggleTaskComplete,
@@ -27,9 +27,7 @@ function ProjectsTasksList({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-8">
-            <Checkbox />
-          </TableHead>
+          <TableHead className="w-8">{/* <Checkbox /> */}</TableHead>
           <TableHead>Nombre</TableHead>
           <TableHead>Prioridad</TableHead>
           <TableHead>Estado</TableHead>
@@ -38,7 +36,7 @@ function ProjectsTasksList({
       </TableHeader>
 
       <TableBody>
-        {tasksByProject.map((task) => (
+        {tasksByProjectId.map((task) => (
           <TableRow
             key={task.id}
             data-state={task.is_completed ? "selected" : undefined}

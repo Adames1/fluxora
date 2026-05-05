@@ -7,18 +7,17 @@ import ProjectsTaskForm from "../components/ProjectsTaskForm";
 import { useTasks } from "../hooks/useTasks";
 import ProjectsTasksList from "../components/ProjectsTasksList";
 import emptyData from "/images/empty-data.svg";
+import { useEffect } from "react";
 
 function ProjectsTasks() {
   const { id } = useParams();
   const { projects } = useProjects();
-  const {
-    tasksByProject,
-    loading,
-    handleDeleteTask,
-    handleToggleTaskComplete,
-  } = useTasks();
+  const { allTasks, loading, handleDeleteTask, handleToggleTaskComplete } =
+    useTasks();
 
   const project = projects.find((p) => p.id === id);
+
+  const tasksByProjectId = allTasks.filter((task) => task.project_id === id);
 
   const tasksLabel = {
     low: "Baja",
@@ -49,9 +48,9 @@ function ProjectsTasks() {
         <div className="w-full max-w-sm m-auto">
           <p className="text-center">Cargando Tareas...</p>
         </div>
-      ) : tasksByProject.length > 0 ? (
+      ) : allTasks.length > 0 ? (
         <ProjectsTasksList
-          tasksByProject={tasksByProject}
+          tasksByProjectId={tasksByProjectId}
           onDeleteTask={handleDeleteTask}
           tasksLabel={tasksLabel}
           onToggleTaskComplete={handleToggleTaskComplete}

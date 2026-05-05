@@ -12,7 +12,7 @@ export const useTasks = () => {
   if (!context)
     throw new Error("No se puede usar useContext en este componente");
 
-  const { tasksByProject, loading } = context;
+  const { allTasks, loading } = context;
 
   const handleAddTask = async (id, data, reset) => {
     try {
@@ -46,7 +46,7 @@ export const useTasks = () => {
     handleAddTask,
     handleDeleteTask,
     handleToggleTaskComplete,
-    tasksByProject,
+    allTasks,
     loading,
   };
 };

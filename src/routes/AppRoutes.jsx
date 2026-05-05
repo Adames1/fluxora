@@ -4,7 +4,7 @@ import LoginPage from "@/features/auth/pages/LoginPage";
 import RegisterPage from "@/features/auth/pages/RegisterPage";
 import DashboardPage from "@/features/dashboard/pages/DashboardPage";
 import ProjectsPage from "@/features/projects/pages/ProjectsPage";
-import ProjectsTasks from "@/features/projects/pages/ProjectsTasks";
+import ProjectsTasks from "@/features/projects/pages/ProjectsTasksPage";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes";

@@ -25,15 +25,15 @@ import DeleteModal from "@/components/shared/DeleteModal";
 import { useTasks } from "../hooks/useTasks";
 
 function ProjectsCard({ project, projectsLabel }) {
-  const { tasksByProject } = useTasks();
+  const { allTasks } = useTasks();
 
-  const totalTasks = tasksByProject.length;
+  const totalTasks = allTasks.filter((task) => task.project_id === project.id);
 
-  const tasksCompleted = tasksByProject.filter(
-    (task) => task.is_completed,
+  const tasksCompleted = totalTasks.filter(
+    (task) => task.is_completed !== false,
   ).length;
 
-  const percentageCompleted = (tasksCompleted / totalTasks) * 100;
+  const percentageCompleted = (tasksCompleted / totalTasks.length) * 100;
 
   return (
     <Card size="sm">
@@ -53,7 +53,7 @@ function ProjectsCard({ project, projectsLabel }) {
             <div className="flex items-center justify-between w-full">
               <span>Progreso</span>
               <div className="flex items-center gap-2">
-                <h2>{`${tasksCompleted} / ${totalTasks}`}</h2>
+                <h2>{`${tasksCompleted} / ${totalTasks.length}`}</h2>
                 <h3>Tareas</h3>
               </div>
             </div>

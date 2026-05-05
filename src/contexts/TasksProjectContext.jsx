@@ -7,7 +7,7 @@ export const TasksProjectContext = createContext();
 
 export function TasksByProjectProvider({ children }) {
   const { user } = useAuth();
-  const [tasksByProject, setTasksByProject] = useState([]);
+  const [allTasks, setAllTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export function TasksByProjectProvider({ children }) {
     const fetchTasksProjects = async () => {
       try {
         const data = await getAllTask();
-        setTasksByProject(data);
+        setAllTasks(data);
       } catch (error) {
         console.error(error.message);
       } finally {
@@ -38,17 +38,15 @@ export function TasksByProjectProvider({ children }) {
         },
         (payload) => {
           if (payload.eventType === "INSERT") {
-            setTasksByProject((prev) => [payload.new, ...prev]);
+            setAllTasks((prev) => [payload.new, ...prev]);
           }
           if (payload.eventType === "UPDATE") {
-            setTasksByProject((prev) =>
+            setAllTasks((prev) =>
               prev.map((p) => (p.id === payload.new.id ? payload.new : p)),
             );
           }
           if (payload.eventType === "DELETE") {
-            setTasksByProject((prev) =>
-              prev.filter((p) => p.id !== payload.old.id),
-            );
+            setAllTasks((prev) => prev.filter((p) => p.id !== payload.old.id));
           }
         },
       )
@@ -58,7 +56,7 @@ export function TasksByProjectProvider({ children }) {
   }, [user?.id]);
 
   return (
-    <TasksProjectContext.Provider value={{ tasksByProject, loading }}>
+    <TasksProjectContext.Provider value={{ allTasks, loading }}>
       {children}
     </TasksProjectContext.Provider>
   );
