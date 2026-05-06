@@ -27,7 +27,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTasks } from "../hooks/useTasks";
 import { useParams } from "react-router";
 
-function ProjectsTaskForm() {
+function ProjectsTaskForm({ setOpenDialog }) {
   const { id } = useParams();
 
   const { handleAddTask } = useTasks();
@@ -45,7 +45,9 @@ function ProjectsTaskForm() {
   return (
     <DialogContent className="sm:max-w-sm">
       <form
-        onSubmit={handleSubmit((data) => handleAddTask(id, data, reset))}
+        onSubmit={handleSubmit((data) =>
+          handleAddTask(id, data, reset, setOpenDialog),
+        )}
         className="space-y-6"
       >
         <DialogHeader>

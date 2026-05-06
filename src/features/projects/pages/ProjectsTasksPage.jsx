@@ -7,13 +7,14 @@ import ProjectsTaskForm from "../components/ProjectsTaskForm";
 import { useTasks } from "../hooks/useTasks";
 import ProjectsTasksList from "../components/ProjectsTasksList";
 import emptyData from "/images/empty-data.svg";
-import { useEffect } from "react";
+import { useState } from "react";
 
 function ProjectsTasks() {
   const { id } = useParams();
   const { projects } = useProjects();
   const { allTasks, loading, handleDeleteTask, handleToggleTaskComplete } =
     useTasks();
+  const [openDialog, setOpenDialog] = useState(false);
 
   const project = projects.find((p) => p.id === id);
 
@@ -35,12 +36,15 @@ function ProjectsTasks() {
           </p>
         </div>
 
-        <Dialog>
+        <Dialog
+          open={openDialog}
+          onOpenChange={() => setOpenDialog(!openDialog)}
+        >
           <DialogTrigger asChild>
             <Button variant="outline">Crear tarea</Button>
           </DialogTrigger>
 
-          <ProjectsTaskForm />
+          <ProjectsTaskForm setOpenDialog={setOpenDialog} />
         </Dialog>
       </div>
 

@@ -29,9 +29,15 @@ import {
 } from "../validations/projects.schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useProjects } from "../hooks/useProjects";
+import { useEffect } from "react";
 
-function ProjectsForm() {
-  const { handleAddProject } = useProjects();
+function ProjectsForm({
+  setOpenDialog,
+  isEditting,
+  setIsEditting,
+  selectedProject,
+}) {
+  const { handleAddProject, handleUpdateProject } = useProjects();
   const {
     register,
     handleSubmit,
@@ -40,19 +46,38 @@ function ProjectsForm() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(projectSchema),
-    defaultValues: projectDefaultValues,
+    defaultValues: isEditting ? selectedProject : projectDefaultValues,
   });
+
+  useEffect(() => {
+    if (isEditting && selectedProject) {
+      reset(selectedProject);
+    }
+  }, [isEditting, selectedProject]);
 
   return (
     <DialogContent className="sm:max-w-sm">
       <form
-        onSubmit={handleSubmit((data) => handleAddProject(data, reset))}
+        onSubmit={handleSubmit((data) =>
+          isEditting
+            ? handleUpdateProject(
+                data,
+                reset,
+                setIsEditting,
+                selectedProject.id,
+              )
+            : handleAddProject(data, reset, setOpenDialog),
+        )}
         className="space-y-6"
       >
         <DialogHeader>
-          <DialogTitle>Crear proyecto</DialogTitle>
+          <DialogTitle>
+            {isEditting ? "Editar proyecto" : "Crear proyecto"}
+          </DialogTitle>
           <DialogDescription>
-            Ingresa los datos necesarios para crear un nuevo proyecto.
+            {isEditting
+              ? "Edita los datos necesarios para actualizar este proyecto."
+              : "Ingresa los datos necesarios para crear un nuevo proyecto."}
           </DialogDescription>
         </DialogHeader>
 
@@ -109,7 +134,9 @@ function ProjectsForm() {
           <DialogClose asChild>
             <Button variant="outline">Cancelar</Button>
           </DialogClose>
-          <Button type="submit">Guardar proyecto</Button>
+          <Button type="submit">
+            {isEditting ? "Editar proyecto" : "Guardar proyecto"}
+          </Button>
         </DialogFooter>
       </form>
     </DialogContent>

@@ -24,7 +24,12 @@ import { Trash, Pen, ClipboardCheck } from "lucide-react";
 import DeleteModal from "@/components/shared/DeleteModal";
 import { useTasks } from "../hooks/useTasks";
 
-function ProjectsCard({ project, projectsLabel }) {
+function ProjectsCard({
+  project,
+  projectsLabel,
+  setIsEditting,
+  setSelectedProject,
+}) {
   const { allTasks } = useTasks();
 
   const totalTasks = allTasks.filter((task) => task.project_id === project.id);
@@ -75,7 +80,13 @@ function ProjectsCard({ project, projectsLabel }) {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline" size="sm">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  (setIsEditting(true), setSelectedProject(project));
+                }}
+              >
                 <Pen />
               </Button>
             </TooltipTrigger>

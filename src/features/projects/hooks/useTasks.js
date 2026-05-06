@@ -14,23 +14,24 @@ export const useTasks = () => {
 
   const { allTasks, loading } = context;
 
-  const handleAddTask = async (id, data, reset) => {
+  const handleAddTask = async (id, data, reset, setOpenDialog) => {
     try {
       await addTask(id, data);
 
-      toast.success("Nueva tarea agregada");
+      toast.success("Nueva tarea agregada", { position: "top-right" });
       reset();
+      setOpenDialog(false);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message, { position: "top-right" });
     }
   };
 
   const handleDeleteTask = async (id) => {
     try {
       await deleteTask(id);
-      toast.success("Tarea eliminada");
+      toast.success("Tarea eliminada", { position: "top-right" });
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message, { position: "top-right" });
     }
   };
 
@@ -38,7 +39,7 @@ export const useTasks = () => {
     try {
       await toggleTaskComplete(id, isCompleted);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message, { position: "top-right" });
     }
   };
 

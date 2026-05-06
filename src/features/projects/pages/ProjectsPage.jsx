@@ -5,9 +5,13 @@ import ProjectsList from "../components/ProjectsList";
 import { useProjects } from "../hooks/useProjects";
 
 import emptyData from "/images/empty-data.svg";
+import { useState } from "react";
 
 function ProjectsPage() {
   const { projects, loading } = useProjects();
+  const [openDialog, setOpenDialog] = useState(false);
+  const [isEditting, setIsEditting] = useState(false);
+  const [selectedProject, setSelectedProject] = useState({});
 
   const totalProjects = projects.length;
 
@@ -22,12 +26,22 @@ function ProjectsPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">{`Mis Proyectos (${totalProjects})`}</h1>
 
-        <Dialog>
+        <Dialog
+          open={openDialog || isEditting}
+          onOpenChange={() =>
+            isEditting ? setIsEditting(!isEditting) : setOpenDialog(!openDialog)
+          }
+        >
           <DialogTrigger asChild>
             <Button variant="outline">Crear proyecto</Button>
           </DialogTrigger>
 
-          <ProjectsForm />
+          <ProjectsForm
+            setOpenDialog={setOpenDialog}
+            isEditting={isEditting}
+            setIsEditting={setIsEditting}
+            selectedProject={selectedProject}
+          />
         </Dialog>
       </div>
 
@@ -36,7 +50,12 @@ function ProjectsPage() {
           <p className="text-center">Cargando proyectos...</p>
         </div>
       ) : projects.length > 0 ? (
-        <ProjectsList projects={projects} projectsLabel={projectsLabel} />
+        <ProjectsList
+          projects={projects}
+          projectsLabel={projectsLabel}
+          setIsEditting={setIsEditting}
+          setSelectedProject={setSelectedProject}
+        />
       ) : (
         <div className="w-full max-w-sm m-auto">
           <div className="flex flex-col gap-6 items-center">
