@@ -16,11 +16,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { X } from "lucide-react";
+import { TASK_PRIORITY_LABEL } from "../constants";
 
 function ProjectsTasksList({
   tasksByProjectId,
   onDeleteTask,
-  tasksLabel,
   onToggleTaskComplete,
 }) {
   return (
@@ -57,7 +57,7 @@ function ProjectsTasksList({
               {task.name}
             </TableCell>
             <TableCell>
-              <Badge>{tasksLabel[task.priority]}</Badge>
+              <Badge>{TASK_PRIORITY_LABEL[task.priority]}</Badge>
             </TableCell>
             <TableCell>
               <Badge>{task.is_completed ? "Completada" : "Pendiente"}</Badge>

@@ -8,7 +8,7 @@ import { Check, FolderOpen, Pickaxe } from "lucide-react";
 
 function SectionCards({ totalProjects, projectInProgress, projectsCompleted }) {
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:col-span-3">
       <Card className="@container/card">
         <CardHeader>
           <div className="flex items-center gap-2">

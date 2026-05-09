@@ -20,12 +20,6 @@ function ProjectsTasks() {
 
   const tasksByProjectId = allTasks.filter((task) => task.project_id === id);
 
-  const tasksLabel = {
-    low: "Baja",
-    medium: "Media",
-    high: "Alta",
-  };
-
   return (
     <div className="h-full flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -52,11 +46,10 @@ function ProjectsTasks() {
         <div className="w-full max-w-sm m-auto">
           <p className="text-center">Cargando Tareas...</p>
         </div>
-      ) : allTasks.length > 0 ? (
+      ) : tasksByProjectId.length > 0 ? (
         <ProjectsTasksList
           tasksByProjectId={tasksByProjectId}
           onDeleteTask={handleDeleteTask}
-          tasksLabel={tasksLabel}
           onToggleTaskComplete={handleToggleTaskComplete}
         />
       ) : (

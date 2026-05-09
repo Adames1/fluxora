@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase";
+import { supabase } from "@/lib/supabase";
 
 // agregar una nueva tarea
 export const addTask = async (projectId, taskData) => {

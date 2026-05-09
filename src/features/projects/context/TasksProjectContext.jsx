@@ -1,22 +1,22 @@
 import { createContext, useState, useEffect } from "react";
-import { supabase } from "@/utils/supabase";
-import { getAllProjects } from "@/features/projects/services/projects.services";
+import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import { getAllTask } from "@/features/projects/services/tasks.services";
 
-export const ProjectsContext = createContext();
+export const TasksProjectContext = createContext();
 
-export function ProjectsProvider({ children }) {
+export function TasksByProjectProvider({ children }) {
   const { user } = useAuth();
-  const [projects, setProjects] = useState([]);
+  const [allTasks, setAllTasks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!user) return;
 
-    const fetchProjects = async () => {
+    const fetchTasksProjects = async () => {
       try {
-        const data = await getAllProjects();
-        setProjects(data);
+        const data = await getAllTask();
+        setAllTasks(data);
       } catch (error) {
         console.error(error.message);
       } finally {
@@ -24,29 +24,29 @@ export function ProjectsProvider({ children }) {
       }
     };
 
-    fetchProjects();
+    fetchTasksProjects();
 
     const channel = supabase
-      .channel("projects-room")
+      .channel("tasks-room")
       .on(
         "postgres_changes",
         {
           event: "*",
           schema: "public",
-          table: "projects",
+          table: "tasks",
           filter: `user_id=eq.${user.id}`,
         },
         (payload) => {
           if (payload.eventType === "INSERT") {
-            setProjects((prev) => [payload.new, ...prev]);
+            setAllTasks((prev) => [payload.new, ...prev]);
           }
           if (payload.eventType === "UPDATE") {
-            setProjects((prev) =>
+            setAllTasks((prev) =>
               prev.map((p) => (p.id === payload.new.id ? payload.new : p)),
             );
           }
           if (payload.eventType === "DELETE") {
-            setProjects((prev) => prev.filter((p) => p.id !== payload.old.id));
+            setAllTasks((prev) => prev.filter((p) => p.id !== payload.old.id));
           }
         },
       )
@@ -56,8 +56,8 @@ export function ProjectsProvider({ children }) {
   }, [user?.id]);
 
   return (
-    <ProjectsContext.Provider value={{ projects, loading }}>
+    <TasksProjectContext.Provider value={{ allTasks, loading }}>
       {children}
-    </ProjectsContext.Provider>
+    </TasksProjectContext.Provider>
   );
 }

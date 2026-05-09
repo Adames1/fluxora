@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router";
 import { Toaster } from "sonner";
 import AppRoutes from "./routes/AppRoutes";
-import AppProvider from "./contexts/AppProvider";
+import AppProvider from "./AppProvider";
 
 function App() {
   return (

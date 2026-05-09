@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, loginDefaultValues } from "../validations/auth.schemas";
 import { loginWithEmail } from "../services/auth.services";
+import { PATHS } from "@/routes/paths";
 
 function LoginPage() {
   const {
@@ -44,16 +45,17 @@ function LoginPage() {
     <div className="flex flex-col gap-6">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Inicia sesión en tu cuenta</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Introduce tus credenciales a continuación para iniciar sesión en tu
+            cuenta.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="email">Correo Electronico</FieldLabel>
                 <Input
                   id="email"
                   type="email"
@@ -66,12 +68,12 @@ function LoginPage() {
               </Field>
               <Field>
                 <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <FieldLabel htmlFor="password">Contraseña</FieldLabel>
                   <Link
                     to="#"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
-                    Forgot your password?
+                    ¿Olvidaste tu contraseña?
                   </Link>
                 </div>
                 <Input
@@ -84,10 +86,11 @@ function LoginPage() {
                 )}
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <Button type="submit">Iniciar Sesión</Button>
 
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <Link to="/sign-up">Sign up</Link>
+                  ¿No tienes una cuenta?{" "}
+                  <Link to={PATHS.signUp}>Crear Cuenta</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

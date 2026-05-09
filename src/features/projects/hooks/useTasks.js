@@ -5,12 +5,12 @@ import {
 } from "../services/tasks.services";
 import { toast } from "sonner";
 import { useContext } from "react";
-import { TasksProjectContext } from "@/contexts/TasksProjectContext";
+import { TasksProjectContext } from "@/features/projects/context/TasksProjectContext";
 
 export const useTasks = () => {
   const context = useContext(TasksProjectContext);
   if (!context)
-    throw new Error("No se puede usar useContext en este componente");
+    throw new Error("useTasks debe usarse dentro de TasksByProjectProvider");
 
   const { allTasks, loading } = context;
 

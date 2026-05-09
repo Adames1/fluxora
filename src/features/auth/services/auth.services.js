@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase";
+import { supabase } from "@/lib/supabase";
 
 // iniciar sesion
 export const loginWithEmail = async (email, password) => {

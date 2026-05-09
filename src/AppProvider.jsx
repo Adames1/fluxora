@@ -1,7 +1,7 @@
-import { AuthProvider } from "./AuthContext";
-import { ProjectsProvider } from "./ProjectsContext";
+import { AuthProvider } from "./features/auth/context/AuthContext";
+import { ProjectsProvider } from "./features/projects/context/ProjectsContext";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { TasksByProjectProvider } from "./TasksProjectContext";
+import { TasksByProjectProvider } from "./features/projects/context/TasksProjectContext";
 
 function AppProvider({ children }) {
   return (

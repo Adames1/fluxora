@@ -15,20 +15,10 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { EllipsisVertical, LogOut } from "lucide-react";
+import { getInitials } from "@/features/auth/helpers";
 
 function NavUser({ handleLogOut, profile }) {
   const { isMobile } = useSidebar();
-
-  const getInitials = (fullName) => {
-    if (!fullName) return "?";
-
-    const [firstName, lastName] = fullName.trim().split(" ");
-
-    const firstInitial = firstName?.[0] ?? "";
-    const lastInitial = lastName?.[0] ?? "";
-
-    return `${firstInitial}${lastInitial}`.toUpperCase();
-  };
 
   return (
     <SidebarMenu>

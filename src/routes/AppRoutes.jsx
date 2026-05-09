@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router";
+import { PATHS } from "./paths";
 
 import LoginPage from "@/features/auth/pages/LoginPage";
 import RegisterPage from "@/features/auth/pages/RegisterPage";
@@ -17,8 +18,8 @@ function AppRoutes() {
       {/* rutas publicas */}
       <Route element={<PublicRoutes />}>
         <Route element={<AuthLayout />}>
-          <Route path="/sign-in" element={<LoginPage />} />
-          <Route path="/sign-up" element={<RegisterPage />} />
+          <Route path={PATHS.signIn} element={<LoginPage />} />
+          <Route path={PATHS.signUp} element={<RegisterPage />} />
         </Route>
       </Route>
 
@@ -26,7 +27,7 @@ function AppRoutes() {
       <Route element={<ProtectedRoutes />}>
         <Route element={<MainLayout />}>
           <Route path="/" element={<DashboardPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path={PATHS.projects} element={<ProjectsPage />} />
           <Route path="/projects/:id" element={<ProjectsTasks />} />
         </Route>
       </Route>

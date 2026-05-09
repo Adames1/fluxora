@@ -1,25 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+
+import { useProjects } from "../hooks/useProjects";
+import { useState } from "react";
+
 import ProjectsForm from "../components/ProjectsForm";
 import ProjectsList from "../components/ProjectsList";
-import { useProjects } from "../hooks/useProjects";
-
 import emptyData from "/images/empty-data.svg";
-import { useState } from "react";
 
 function ProjectsPage() {
   const { projects, loading } = useProjects();
   const [openDialog, setOpenDialog] = useState(false);
   const [isEditting, setIsEditting] = useState(false);
-  const [selectedProject, setSelectedProject] = useState({});
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const totalProjects = projects.length;
-
-  const projectsLabel = {
-    pending: "Pendiente",
-    completed: "Completado",
-    in_progress: "En Progreso",
-  };
 
   return (
     <div className="h-full flex flex-col gap-6">
@@ -52,7 +47,6 @@ function ProjectsPage() {
       ) : projects.length > 0 ? (
         <ProjectsList
           projects={projects}
-          projectsLabel={projectsLabel}
           setIsEditting={setIsEditting}
           setSelectedProject={setSelectedProject}
         />

@@ -9,11 +9,8 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Trash2Icon } from "lucide-react";
-import { useProjects } from "@/features/projects/hooks/useProjects";
 
-function DeleteModal({ title, description, projectId }) {
-  const { handleDeleteProyect } = useProjects();
-
+function DeleteModal({ title, description, onConfirm }) {
   return (
     <AlertDialogContent size="sm">
       <AlertDialogHeader>
@@ -25,10 +22,7 @@ function DeleteModal({ title, description, projectId }) {
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel variant="outline">Cancelar</AlertDialogCancel>
-        <AlertDialogAction
-          variant="destructive"
-          onClick={() => handleDeleteProyect(projectId)}
-        >
+        <AlertDialogAction variant="destructive" onClick={onConfirm}>
           Eliminar
         </AlertDialogAction>
       </AlertDialogFooter>

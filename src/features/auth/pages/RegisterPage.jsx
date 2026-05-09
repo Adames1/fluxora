@@ -23,6 +23,7 @@ import {
 } from "../validations/auth.schemas";
 import { toast } from "sonner";
 import { createNewUser } from "../services/auth.services";
+import { PATHS } from "@/routes/paths";
 
 function RegisterPage() {
   const {
@@ -47,16 +48,16 @@ function RegisterPage() {
     <div className="flex flex-col gap-6">
       <Card>
         <CardHeader className="text-center">
-          <CardTitle>Create an account</CardTitle>
+          <CardTitle>Crear una cuenta</CardTitle>
           <CardDescription>
-            Enter your information below to create your account
+            Introduce tu información a continuación para crear tu cuenta.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name">Full Name</FieldLabel>
+                <FieldLabel htmlFor="name">Nombre Completo</FieldLabel>
                 <Input
                   id="name"
                   type="text"
@@ -68,7 +69,7 @@ function RegisterPage() {
                 <FieldDescription>{errors.full_name.message}</FieldDescription>
               )}
               <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="email">Correo Electronico</FieldLabel>
                 <Input
                   id="email"
                   type="email"
@@ -80,7 +81,7 @@ function RegisterPage() {
                 )}
               </Field>
               <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <FieldLabel htmlFor="password">Contraseña</FieldLabel>
                 <Input
                   id="password"
                   type="password"
@@ -92,7 +93,7 @@ function RegisterPage() {
               </Field>
               <Field>
                 <FieldLabel htmlFor="confirm-password">
-                  Confirm Password
+                  Confirmar Contraseña
                 </FieldLabel>
                 <Input
                   id="confirm-password"
@@ -107,10 +108,11 @@ function RegisterPage() {
               </Field>
               <FieldGroup>
                 <Field>
-                  <Button type="submit">Create Account</Button>
+                  <Button type="submit">Crear Cuenta</Button>
 
                   <FieldDescription className="px-6 text-center">
-                    Already have an account? <Link to="/sign-in">Sign in</Link>
+                    ¿Ya tienes una cuenta?{" "}
+                    <Link to={PATHS.signIn}>Iniciar Sesión</Link>
                   </FieldDescription>
                 </Field>
               </FieldGroup>

@@ -1,4 +1,4 @@
-import { supabase } from "@/utils/supabase";
+import { supabase } from "@/lib/supabase";
 
 // agregar un nuevo proyecto en base de datos
 export const addProject = async (projectData) => {

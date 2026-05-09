@@ -12,8 +12,9 @@ import { Link } from "react-router";
 import NavMain from "./NavMain";
 import NavUser from "./NavUser";
 import { logout } from "@/features/auth/services/auth.services";
-import { getDataProfile } from "@/features/profiles/services/profiles.services";
+import { getDataProfile } from "@/features/auth/services/profiles.services";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 const navItems = [
   {
@@ -30,15 +31,16 @@ const navItems = [
 
 function AppSidebar({ ...props }) {
   const [profile, setProfile] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const data = await getDataProfile();
+      const data = await getDataProfile(user.id);
       setProfile(data);
     };
 
     fetchProfileData();
-  }, []);
+  }, [user.id]);
 
   const handleLogOut = async () => {
     await logout();

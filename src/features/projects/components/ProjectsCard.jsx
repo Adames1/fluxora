@@ -1,3 +1,9 @@
+import DeleteModal from "@/components/shared/DeleteModal";
+import { Link } from "react-router";
+import { Trash, Pen, ClipboardCheck } from "lucide-react";
+import { useTasks } from "../hooks/useTasks";
+import { PROJECT_STATUS_LABEL } from "../constants";
+
 import {
   Card,
   CardContent,
@@ -18,19 +24,11 @@ import { Separator } from "@/components/ui/separator";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { useProjects } from "../hooks/useProjects";
 
-import { Link } from "react-router";
-import { Trash, Pen, ClipboardCheck } from "lucide-react";
-import DeleteModal from "@/components/shared/DeleteModal";
-import { useTasks } from "../hooks/useTasks";
-
-function ProjectsCard({
-  project,
-  projectsLabel,
-  setIsEditting,
-  setSelectedProject,
-}) {
+function ProjectsCard({ project, setIsEditting, setSelectedProject }) {
   const { allTasks } = useTasks();
+  const { handleDeleteProyect } = useProjects();
 
   const totalTasks = allTasks.filter((task) => task.project_id === project.id);
 
@@ -44,7 +42,9 @@ function ProjectsCard({
     <Card size="sm">
       <CardHeader>
         <CardAction>
-          <Badge variant="secondary">{projectsLabel[project.status]}</Badge>
+          <Badge variant="secondary">
+            {PROJECT_STATUS_LABEL[project.status]}
+          </Badge>
         </CardAction>
         <CardTitle>{project.name}</CardTitle>
         <CardDescription>
@@ -112,7 +112,7 @@ function ProjectsCard({
             <DeleteModal
               title="¿Eliminar proyecto?"
               description="¿Estás seguro de que quieres eliminar este proyecto? Ten en cuenta que este proceso no se puede deshacer."
-              projectId={project.id}
+              onConfirm={() => handleDeleteProyect(project.id)}
             />
           </AlertDialog>
         </div>
