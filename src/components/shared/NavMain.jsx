@@ -12,11 +12,16 @@ function NavMain({ items }) {
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => (
-            <NavLink key={item.title} to={item.url}>
-              <SidebarMenuButton tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
-              </SidebarMenuButton>
+            <NavLink key={item.title} to={item.url} end={item.url === "/"}>
+              {({ isActive }) => (
+                <SidebarMenuButton
+                  tooltip={item.title}
+                  isActive={isActive}
+                >
+                  {item.icon && <item.icon />}
+                  <span>{item.title}</span>
+                </SidebarMenuButton>
+              )}
             </NavLink>
           ))}
         </SidebarMenu>

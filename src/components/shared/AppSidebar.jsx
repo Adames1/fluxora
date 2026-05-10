@@ -56,8 +56,8 @@ function AppSidebar({ ...props }) {
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
               <Link to="/">
-                <ArrowDownUp className="size-5!" />
-                <span className="text-base font-semibold">FlowMe</span>
+                <ArrowDownUp className="size-5! text-primary" />
+                <span className="text-base font-semibold">Trakio</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

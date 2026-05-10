@@ -26,6 +26,16 @@ import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { useProjects } from "../hooks/useProjects";
 
+// Colores semánticos por estado de proyecto
+const STATUS_BADGE = {
+  pending:
+    "bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400 border-0",
+  in_progress:
+    "bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400 border-0",
+  completed:
+    "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border-0",
+};
+
 function ProjectsCard({ project, setIsEditting, setSelectedProject }) {
   const { allTasks } = useTasks();
   const { handleDeleteProyect } = useProjects();
@@ -36,13 +46,15 @@ function ProjectsCard({ project, setIsEditting, setSelectedProject }) {
     (task) => task.is_completed !== false,
   ).length;
 
-  const percentageCompleted = (tasksCompleted / totalTasks.length) * 100;
+  const percentageCompleted = totalTasks.length
+    ? Math.round((tasksCompleted / totalTasks.length) * 100)
+    : 0;
 
   return (
     <Card size="sm">
       <CardHeader>
         <CardAction>
-          <Badge variant="secondary">
+          <Badge className={STATUS_BADGE[project.status]}>
             {PROJECT_STATUS_LABEL[project.status]}
           </Badge>
         </CardAction>
@@ -57,9 +69,13 @@ function ProjectsCard({ project, setIsEditting, setSelectedProject }) {
           <FieldLabel htmlFor="progress-upload">
             <div className="flex items-center justify-between w-full">
               <span>Progreso</span>
-              <div className="flex items-center gap-2">
-                <h2>{`${tasksCompleted} / ${totalTasks.length}`}</h2>
-                <h3>Tareas</h3>
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span className="font-medium text-foreground">
+                  {tasksCompleted}
+                </span>
+                <span>/</span>
+                <span>{totalTasks.length}</span>
+                <span>tareas</span>
               </div>
             </div>
           </FieldLabel>
@@ -81,10 +97,11 @@ function ProjectsCard({ project, setIsEditting, setSelectedProject }) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 onClick={() => {
-                  (setIsEditting(true), setSelectedProject(project));
+                  setIsEditting(true);
+                  setSelectedProject(project);
                 }}
               >
                 <Pen />
@@ -99,7 +116,11 @@ function ProjectsCard({ project, setIsEditting, setSelectedProject }) {
             <Tooltip>
               <TooltipTrigger asChild>
                 <AlertDialogTrigger asChild>
-                  <Button variant="destructive" size="sm">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                  >
                     <Trash />
                   </Button>
                 </AlertDialogTrigger>

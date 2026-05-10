@@ -38,7 +38,13 @@ function TasksTable() {
                 <TableCell>{pending.name}</TableCell>
                 <TableCell>{project?.name || "Sin proyecto"}</TableCell>
                 <TableCell>
-                  <Badge>
+                  <Badge
+                    className={
+                      pending.is_completed
+                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border-0"
+                        : "bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400 border-0"
+                    }
+                  >
                     {pending.is_completed ? "Completada" : "Pendiente"}
                   </Badge>
                 </TableCell>

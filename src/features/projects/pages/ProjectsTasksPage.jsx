@@ -1,5 +1,6 @@
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 import { useParams } from "react-router";
 import { useProjects } from "../hooks/useProjects";
@@ -25,7 +26,7 @@ function ProjectsTasks() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-semibold">{project?.name}</h1>
-          <p className="text-sm">
+          <p className="text-sm text-muted-foreground">
             {project?.description || "Proyecto sin descripción"}
           </p>
         </div>
@@ -35,7 +36,10 @@ function ProjectsTasks() {
           onOpenChange={() => setOpenDialog(!openDialog)}
         >
           <DialogTrigger asChild>
-            <Button variant="outline">Crear tarea</Button>
+            <Button size="sm">
+              <Plus />
+              Crear tarea
+            </Button>
           </DialogTrigger>
 
           <ProjectsTaskForm setOpenDialog={setOpenDialog} />
@@ -44,7 +48,7 @@ function ProjectsTasks() {
 
       {loading ? (
         <div className="w-full max-w-sm m-auto">
-          <p className="text-center">Cargando Tareas...</p>
+          <p className="text-center text-muted-foreground">Cargando tareas...</p>
         </div>
       ) : tasksByProjectId.length > 0 ? (
         <ProjectsTasksList
@@ -56,10 +60,10 @@ function ProjectsTasks() {
         <div className="w-full max-w-sm m-auto">
           <div className="flex flex-col gap-6 items-center">
             <img src={emptyData} className="w-60 h-60" />
-            <p className="text-center text-gray-600">
-              No tienes tareas agregadas. Presiona el boton{" "}
-              <strong>"Crear tarea"</strong>
-              para agregar una a tu lista.
+            <p className="text-center text-muted-foreground">
+              No tienes tareas agregadas. Presiona el botón{" "}
+              <strong className="text-foreground">"Crear tarea"</strong>
+              {" "}para agregar una a tu lista.
             </p>
           </div>
         </div>

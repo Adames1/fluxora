@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Plus } from "lucide-react";
 
 import { useProjects } from "../hooks/useProjects";
 import { useState } from "react";
@@ -28,7 +29,10 @@ function ProjectsPage() {
           }
         >
           <DialogTrigger asChild>
-            <Button variant="outline">Crear proyecto</Button>
+            <Button size="sm">
+              <Plus />
+              Crear proyecto
+            </Button>
           </DialogTrigger>
 
           <ProjectsForm
@@ -42,7 +46,7 @@ function ProjectsPage() {
 
       {loading ? (
         <div className="w-full max-w-sm m-auto">
-          <p className="text-center">Cargando proyectos...</p>
+          <p className="text-center text-muted-foreground">Cargando proyectos...</p>
         </div>
       ) : projects.length > 0 ? (
         <ProjectsList
@@ -54,10 +58,10 @@ function ProjectsPage() {
         <div className="w-full max-w-sm m-auto">
           <div className="flex flex-col gap-6 items-center">
             <img src={emptyData} className="w-60 h-60" />
-            <p className="text-center text-gray-600">
-              No tienes proyectos agregados. Presiona el boton{" "}
-              <strong>"Crear proyecto"</strong>
-              para agregar uno a tu lista.
+            <p className="text-center text-muted-foreground">
+              No tienes proyectos agregados. Presiona el botón{" "}
+              <strong className="text-foreground">"Crear proyecto"</strong>
+              {" "}para agregar uno a tu lista.
             </p>
           </div>
         </div>

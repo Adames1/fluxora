@@ -48,73 +48,123 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ─── Brand palette reference ───────────────────────────────────────────────
+ *
+ *  purple-50  oklch(0.965 0.020 292)  → #F5F3FF  surfaces muy suaves
+ *  purple-100 oklch(0.935 0.038 292)  → #EAE8FF  lavender surface / badges
+ *  purple-600 oklch(0.527 0.215 292)  → #6B4FD8  primary (botones, links, ring)
+ *  purple-700 oklch(0.455 0.205 292)  → #5239B5  hover/pressed de primary
+ *  orange-600 oklch(0.660 0.168  49)  → #E07422  CTA / upgrade / accent
+ *  dark-900   oklch(0.258 0.042 264)  → #2D3142  foreground (texto, iconos)
+ *
+ * ──────────────────────────────────────────────────────────────────────────── */
+
 :root {
+    /* Base */
     --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    --foreground: oklch(0.258 0.042 264);        /* #2D3142  dark-900 → cuerpo de texto */
+
+    /* Cards & popovers — neutros, solo el texto cambia */
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
+    --card-foreground: oklch(0.258 0.042 264);   /* dark-900 */
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.258 0.042 264);
+
+    /* Primary → purple-600 (#6B4FD8) — botones principales, links, focus */
+    --primary: oklch(0.527 0.215 292);
+    --primary-foreground: oklch(0.985 0 0);      /* blanco puro */
+
+    /* Secondary → lavender surface — chips, tags, estados secundarios */
+    --secondary: oklch(0.935 0.038 292);         /* purple-100 #EAE8FF */
+    --secondary-foreground: oklch(0.455 0.205 292); /* purple-700 para contraste */
+
+    /* Muted → surface muy suave, casi neutro */
+    --muted: oklch(0.965 0.020 292);             /* purple-50 #F5F3FF */
+    --muted-foreground: oklch(0.520 0.040 270);  /* gris-azulado medio */
+
+    /* Accent → orange-600 (#E07422) — CTAs de upgrade, banners, onboarding */
+    --accent: oklch(0.660 0.168 49);
+    --accent-foreground: oklch(0.985 0 0);       /* blanco para texto sobre orange */
+
+    /* Destructive — se mantiene rojo estándar */
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
+
+    /* Borders & inputs */
+    --border: oklch(0.900 0.025 292);            /* tinte suave de purple */
+    --input: oklch(0.900 0.025 292);
+    --ring: oklch(0.527 0.215 292);              /* purple-600 — focus ring */
+
+    /* Charts — escala monocromática de purple */
+    --chart-1: oklch(0.527 0.215 292);           /* purple-600 */
+    --chart-2: oklch(0.660 0.168 49);            /* orange-600 */
+    --chart-3: oklch(0.583 0.195 292);           /* purple-500 */
+    --chart-4: oklch(0.870 0.075 292);           /* purple-200 */
+    --chart-5: oklch(0.455 0.205 292);           /* purple-700 */
+
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
+
+    /* Sidebar */
+    --sidebar: oklch(0.965 0.020 292);           /* purple-50 — fondo del sidebar */
+    --sidebar-foreground: oklch(0.258 0.042 264); /* dark-900 */
+    --sidebar-primary: oklch(0.527 0.215 292);   /* purple-600 — item activo */
     --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar-accent: oklch(0.935 0.038 292);    /* purple-100 — hover de item */
+    --sidebar-accent-foreground: oklch(0.455 0.205 292); /* purple-700 */
+    --sidebar-border: oklch(0.900 0.025 292);
+    --sidebar-ring: oklch(0.527 0.215 292);
 }
 
 .dark {
+    /* Base */
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
+
+    /* Cards & popovers */
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.205 0 0);
     --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
+
+    /* Primary → purple-500 en dark (más claro para contrastar sobre oscuro) */
+    --primary: oklch(0.735 0.175 292);           /* purple claro visible en dark */
+    --primary-foreground: oklch(0.145 0.040 292); /* oscuro para texto sobre primary */
+
+    /* Secondary → tinte oscuro de purple */
+    --secondary: oklch(0.258 0.042 264);         /* dark-900 como superficie */
     --secondary-foreground: oklch(0.985 0 0);
+
+    /* Muted */
     --muted: oklch(0.269 0 0);
     --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+
+    /* Accent → orange se mantiene pero algo más claro en dark */
+    --accent: oklch(0.733 0.155 52);             /* orange-400 — más legible en dark */
+    --accent-foreground: oklch(0.145 0 0);       /* oscuro para texto sobre orange */
+
+    /* Destructive */
     --destructive: oklch(0.704 0.191 22.216);
+
+    /* Borders & inputs */
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
+    --ring: oklch(0.735 0.175 292);              /* purple claro en dark */
+
+    /* Charts */
+    --chart-1: oklch(0.735 0.175 292);           /* purple claro */
+    --chart-2: oklch(0.733 0.155 52);            /* orange-400 */
+    --chart-3: oklch(0.583 0.195 292);           /* purple-500 */
+    --chart-4: oklch(0.870 0.075 292);           /* purple-200 */
+    --chart-5: oklch(0.455 0.205 292);           /* purple-700 */
+
+    /* Sidebar */
     --sidebar: oklch(0.205 0 0);
     --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.735 0.175 292);   /* purple claro — item activo */
+    --sidebar-primary-foreground: oklch(0.145 0 0);
     --sidebar-accent: oklch(0.269 0 0);
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --sidebar-ring: oklch(0.735 0.175 292);
 }
 
 @layer base {
