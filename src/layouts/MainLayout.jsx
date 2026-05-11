@@ -14,7 +14,7 @@ function MainLayout() {
       <AppSidebar variant="inset" />
       <SidebarInset>
         <SiteHeader />
-        <div className="px-4 lg:px-6 flex-1 py-4 md:py-6">
+        <div className="px-5 lg:px-12 flex-1 py-6 md:py-8">
           <Outlet />
         </div>
       </SidebarInset>

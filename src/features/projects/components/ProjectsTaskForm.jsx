@@ -60,7 +60,9 @@ function ProjectsTaskForm({ setOpenDialog }) {
             <Label htmlFor="name">Nombre o Titulo de tarea</Label>
             <Input id="name" name="name" {...register("name")} />
             {errors.name && (
-              <FieldDescription>{errors.name.message}</FieldDescription>
+              <FieldDescription className="text-red-500">
+                {errors.name.message}
+              </FieldDescription>
             )}
           </Field>
 

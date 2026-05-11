@@ -52,6 +52,8 @@ function ProjectsForm({
   useEffect(() => {
     if (isEditting && selectedProject) {
       reset(selectedProject);
+    } else {
+      reset(projectDefaultValues);
     }
   }, [isEditting, selectedProject]);
 
@@ -86,7 +88,9 @@ function ProjectsForm({
             <Label htmlFor="name">Nombre de proyecto</Label>
             <Input id="name" name="name" {...register("name")} />
             {errors.name && (
-              <FieldDescription>{errors.name.message}</FieldDescription>
+              <FieldDescription className="text-red-500">
+                {errors.name.message}
+              </FieldDescription>
             )}
           </Field>
 

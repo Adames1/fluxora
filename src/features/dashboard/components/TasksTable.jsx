@@ -20,39 +20,45 @@ function TasksTable() {
     <div className="lg:col-span-2 space-y-2">
       <h2 className="text-md font-semibold">Tareas pendientes</h2>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Nombre de tarea</TableHead>
-            <TableHead>Proyecto asociado</TableHead>
-            <TableHead>Estado de tarea</TableHead>
-          </TableRow>
-        </TableHeader>
+      {pendingTasks.length > 0 ? (
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Nombre de tarea</TableHead>
+              <TableHead>Proyecto asociado</TableHead>
+              <TableHead>Estado de tarea</TableHead>
+            </TableRow>
+          </TableHeader>
 
-        <TableBody>
-          {pendingTasks.map((pending) => {
-            const project = projects.find((p) => p.id === pending.project_id);
+          <TableBody>
+            {pendingTasks.map((pending) => {
+              const project = projects.find((p) => p.id === pending.project_id);
 
-            return (
-              <TableRow key={pending.id}>
-                <TableCell>{pending.name}</TableCell>
-                <TableCell>{project?.name || "Sin proyecto"}</TableCell>
-                <TableCell>
-                  <Badge
-                    className={
-                      pending.is_completed
-                        ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border-0"
-                        : "bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400 border-0"
-                    }
-                  >
-                    {pending.is_completed ? "Completada" : "Pendiente"}
-                  </Badge>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+              return (
+                <TableRow key={pending.id}>
+                  <TableCell>{pending.name}</TableCell>
+                  <TableCell>{project?.name || "Sin proyecto"}</TableCell>
+                  <TableCell>
+                    <Badge
+                      className={
+                        pending.is_completed
+                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border-0"
+                          : "bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400 border-0"
+                      }
+                    >
+                      {pending.is_completed ? "Completada" : "Pendiente"}
+                    </Badge>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      ) : (
+        <div className="h-full flex items-center justify-center">
+          <p className="text-sm text-gray-600">No tienes tareas pendientes</p>
+        </div>
+      )}
     </div>
   );
 }
