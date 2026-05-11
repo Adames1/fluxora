@@ -1,7 +1,17 @@
-import React from "react";
+import { BrowserRouter } from "react-router";
+import { Toaster } from "sonner";
+import AppRoutes from "./routes/AppRoutes";
+import AppProvider from "./AppProvider";
 
 function App() {
-  return <div>App</div>;
+  return (
+    <AppProvider>
+      <BrowserRouter>
+        <Toaster />
+        <AppRoutes />
+      </BrowserRouter>
+    </AppProvider>
+  );
 }
 
 export default App;
