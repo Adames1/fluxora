@@ -57,7 +57,7 @@ function AppSidebar({ ...props }) {
             >
               <Link to="/">
                 <ArrowDownUp className="size-5! text-primary" />
-                <span className="text-base font-semibold">Trakio</span>
+                <span className="text-base font-semibold">Fluxora</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
