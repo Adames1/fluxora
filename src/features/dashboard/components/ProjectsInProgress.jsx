@@ -1,14 +1,4 @@
-import { useProjects } from "@/features/projects/hooks/useProjects";
-import { useTasks } from "@/features/projects/hooks/useTasks";
-
-function ProjectsInProgress() {
-  const { projects } = useProjects();
-  const { allTasks } = useTasks();
-
-  const inProgressProject = projects.filter(
-    (project) => project.status === "in_progress",
-  );
-
+function ProjectsInProgress({ inProgressProject, allTasks }) {
   return (
     <div className="lg:col-span-1 space-y-4">
       <h2 className="text-md font-semibold">Proyectos en progreso</h2>

@@ -1,7 +1,6 @@
 import DeleteModal from "@/components/shared/DeleteModal";
 import { Link } from "react-router";
 import { Trash, Pen, ClipboardCheck } from "lucide-react";
-import { useTasks } from "../hooks/useTasks";
 import { PROJECT_STATUS_LABEL } from "../constants";
 
 import {
@@ -36,8 +35,12 @@ const STATUS_BADGE = {
     "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border-0",
 };
 
-function ProjectsCard({ project, setIsEditting, setSelectedProject }) {
-  const { allTasks } = useTasks();
+function ProjectsCard({
+  project,
+  setIsEditting,
+  setSelectedProject,
+  allTasks,
+}) {
   const { handleDeleteProyect } = useProjects();
 
   const totalTasks = allTasks.filter((task) => task.project_id === project.id);

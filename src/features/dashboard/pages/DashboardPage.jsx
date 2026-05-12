@@ -3,10 +3,18 @@ import SectionCards from "../components/SectionCards";
 import TasksTable from "../components/TasksTable";
 import ProjectsInProgress from "../components/ProjectsInProgress";
 import { getProjectStats } from "../helpers";
+import { useTasks } from "@/features/projects/hooks/useTasks";
 
 function DashboardPage() {
   const { projects } = useProjects();
+  const { allTasks } = useTasks();
   const { total, inProgress, completed } = getProjectStats(projects);
+
+  const pendingTasks = allTasks.filter((task) => task.is_completed === false);
+
+  const inProgressProject = projects.filter(
+    (project) => project.status === "in_progress",
+  );
 
   return (
     <div className="h-full space-y-4">
@@ -21,10 +29,13 @@ function DashboardPage() {
         />
 
         {/* resumen de tareas pendientes */}
-        <TasksTable />
+        <TasksTable projects={projects} pendingTasks={pendingTasks} />
 
         {/* proyectos en progreso */}
-        <ProjectsInProgress />
+        <ProjectsInProgress
+          inProgressProject={inProgressProject}
+          allTasks={allTasks}
+        />
       </div>
     </div>
   );

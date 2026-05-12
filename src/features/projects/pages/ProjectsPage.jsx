@@ -8,9 +8,11 @@ import { useState } from "react";
 import ProjectsForm from "../components/ProjectsForm";
 import ProjectsList from "../components/ProjectsList";
 import emptyData from "/images/empty-data.svg";
+import { useTasks } from "../hooks/useTasks";
 
 function ProjectsPage() {
   const { projects, loading } = useProjects();
+  const { allTasks } = useTasks();
   const [openDialog, setOpenDialog] = useState(false);
   const [isEditting, setIsEditting] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -46,13 +48,16 @@ function ProjectsPage() {
 
       {loading ? (
         <div className="w-full max-w-sm m-auto">
-          <p className="text-center text-muted-foreground">Cargando proyectos...</p>
+          <p className="text-center text-muted-foreground">
+            Cargando proyectos...
+          </p>
         </div>
       ) : projects.length > 0 ? (
         <ProjectsList
           projects={projects}
           setIsEditting={setIsEditting}
           setSelectedProject={setSelectedProject}
+          allTasks={allTasks}
         />
       ) : (
         <div className="w-full max-w-sm m-auto">
@@ -60,8 +65,8 @@ function ProjectsPage() {
             <img src={emptyData} className="w-60 h-60" />
             <p className="text-center text-muted-foreground">
               No tienes proyectos agregados. Presiona el botón{" "}
-              <strong className="text-foreground">"Crear proyecto"</strong>
-              {" "}para agregar uno a tu lista.
+              <strong className="text-foreground">"Crear proyecto"</strong> para
+              agregar uno a tu lista.
             </p>
           </div>
         </div>

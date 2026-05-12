@@ -1,6 +1,11 @@
 import ProjectsCard from "./ProjectsCard";
 
-function ProjectsList({ projects, setIsEditting, setSelectedProject }) {
+function ProjectsList({
+  projects,
+  setIsEditting,
+  setSelectedProject,
+  allTasks,
+}) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
       {projects.map((project) => (
@@ -9,6 +14,7 @@ function ProjectsList({ projects, setIsEditting, setSelectedProject }) {
           project={project}
           setIsEditting={setIsEditting}
           setSelectedProject={setSelectedProject}
+          allTasks={allTasks}
         />
       ))}
     </div>

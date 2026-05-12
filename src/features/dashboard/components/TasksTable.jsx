@@ -7,15 +7,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { useTasks } from "@/features/projects/hooks/useTasks";
-import { useProjects } from "@/features/projects/hooks/useProjects";
 
-function TasksTable() {
-  const { allTasks } = useTasks();
-  const { projects } = useProjects();
-
-  const pendingTasks = allTasks.filter((task) => task.is_completed === false);
-
+function TasksTable({ projects, pendingTasks }) {
   return (
     <div className="lg:col-span-2 space-y-2">
       <h2 className="text-md font-semibold">Tareas pendientes</h2>
